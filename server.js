@@ -16,7 +16,7 @@ var todos = [{
 }];
 
 app.get('/', function (req, res) {
-    res.send('Salut Vladut!');
+    res.send('Buna Mari!');
 });
 
 app.get('/todos', function(req, res) {
