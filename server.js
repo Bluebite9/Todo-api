@@ -24,7 +24,19 @@ app.get('/todos', function(req, res) {
 });
 
 app.get('/todos/:id', function (req, res) {
-    res.send('Asking for todo with if of ' + req.params.id)
+    
+    var todoId = parseInt(req.params.id, 10);
+    var a;
+    for(var i = 0; i < todos.length; i++){
+        if(todoId === todos[i].id){
+            a = todos[i];
+        }  
+    }
+    if(typeof a === 'undefined'){
+        res.status(404).send();
+    }else{
+        res.json(a);
+    }
 })
 
 app.listen(PORT, function() {
