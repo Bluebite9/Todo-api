@@ -10,11 +10,21 @@ var todoNextId = 1;
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-    res.send('Buna Mari!');
+    res.send('Mere');
 });
-
+    
 app.get('/todos', function(req, res) {
-    res.json(todos); 
+    var queryParams = req.query;
+    var filteredTodos = todos;
+    
+    if (queryParams.hasOwnProperty('completed') && queryParams.completed === 'true'){
+        filteredTodos = _.where(filteredTodos, {'completed' : true});
+    }
+    else if (queryParams.hasOwnProperty('completed') && queryParams.completed === 'false'){
+        filteredTodos = _.where(filteredTodos, {'completed' : false});
+    }
+    
+    res.json(filteredTodos); 
 });
 
 app.get('/todos/:id', function (req, res) {
@@ -79,7 +89,7 @@ app.put('/todos/:id', function (req, res){
     } else if (body.hasOwnProperty('description')) {
         return res.status(400).send();
     }
-    
+
     _.extend(a, validAttributes);
     res.json(a);
 });
