@@ -26,7 +26,7 @@ app.get('/todos', function(req, res) {
     
     if(queryParams.hasOwnProperty('q') && queryParams.q.lenght > 0){
         filteredTodos = _.filter(filteredTodos, function(tds){
-            return tds.description.toLowerCase().indexOf(queryParams.q) > -1;
+            return tds.description.toLowerCase().indexOf(queryParams.q.toLowerCase()) > -1;
         });
     }
     
